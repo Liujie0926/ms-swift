@@ -55,7 +55,7 @@ jobs:
             -e no_proxy \
             -e CE_name \
             -e python_version \
-            -w /workspace --privileged $IMAGE_NAME
+            -w /workspace $IMAGE_NAME
       - name: Checkout Code
         run: |
           docker exec -t $container_name /bin/bash -c '
