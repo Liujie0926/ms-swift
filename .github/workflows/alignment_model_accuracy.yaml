@@ -123,6 +123,7 @@ jobs:
 
           echo "::group::Build ms-swift wheel"
           cd /workspace/ms-swift
+          pip config set global.cache-dir "/home/.cache/pip"
           bash scripts/dependence/build.sh
           ls -l /workspace/upload/
           echo "::endgroup::"
