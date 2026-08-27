@@ -125,8 +125,6 @@ jobs:
           cd /workspace/ms-swift
           pip config set global.cache-dir "/home/.cache/pip"
           # bash scripts/dependence/build.sh
-          wget -q https://paddle-github-action.bj.bcebos.com/whl/ms_swift-0.0.0-py3-none-any.whl
-          mv ms_swift-0.0.0-py3-none-any.whl /workspace/upload/
           ls -l /workspace/upload/
           echo "::endgroup::"
           '
@@ -143,7 +141,9 @@ jobs:
           export PADDLEFLEET_WHEEL_PATH="/workspace/paddlefleet-0.0.0-py3-none-linux_x86_64.whl"
           export PADDLEFLEET_OPS_WHEEL_PATH="/workspace/paddlefleet_ops-0.0.0-cp312-cp312-linux_x86_64.whl"
           export MEGATRON_CORE_WHEEL_PATH=/workspace/megatron_core-0.0.0-cp312-cp312-linux_x86_64.whl
-          export MS_SWIFT_WHEEL_PATH=/workspace/upload/ms_swift-0.0.0-py3-none-any.whl
+          wget -q https://paddle-github-action.bj.bcebos.com/whl/ms_swift-0.0.0-py3-none-any.whl
+          export MS_SWIFT_WHEEL_PATH=/workspace/ms_swift-0.0.0-py3-none-any.whl
+          # export MS_SWIFT_WHEEL_PATH=/workspace/upload/ms_swift-0.0.0-py3-none-any.whl
           # The BOS wheels are republished under a fixed 0.0.0 filename 
           export UV_SKIP_WHEEL_FILENAME_CHECK=1
 
