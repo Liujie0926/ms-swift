@@ -124,7 +124,9 @@ jobs:
           echo "::group::Build ms-swift wheel"
           cd /workspace/ms-swift
           pip config set global.cache-dir "/home/.cache/pip"
-          bash scripts/dependence/build.sh
+          # bash scripts/dependence/build.sh
+          wget -q https://paddle-github-action.bj.bcebos.com/whl/ms_swift-0.0.0-py3-none-any.whl
+          mv ms_swift-0.0.0-py3-none-any.whl /workspace/upload/
           ls -l /workspace/upload/
           echo "::endgroup::"
           '
