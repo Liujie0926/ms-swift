@@ -91,6 +91,7 @@ jobs:
           docker exec -i -e "work_dir=$work_dir" -e "python_version=$python_version" $container_name /bin/bash <<-DOCKER_EOF
           echo "Change python version to $python_version"
           set -e
+          source $work_dir/../../../proxy
           cp ${work_dir}/../../../Miniforge3-Linux-x86_64.sh /tmp/miniforge.sh
           bash /tmp/miniforge.sh -b -p /opt/conda
           /opt/conda/bin/conda create -n py_\$python_version python=\$python_version -y \
@@ -124,7 +125,7 @@ jobs:
           echo "::group::Build ms-swift wheel"
           cd /workspace/ms-swift
           pip config set global.cache-dir "/home/.cache/pip"
-          # bash scripts/dependence/build.sh
+          bash scripts/dependence/build.sh
           ls -l /workspace/upload/
           echo "::endgroup::"
           '
@@ -141,9 +142,7 @@ jobs:
           export PADDLEFLEET_WHEEL_PATH="/workspace/paddlefleet-0.0.0-py3-none-linux_x86_64.whl"
           export PADDLEFLEET_OPS_WHEEL_PATH="/workspace/paddlefleet_ops-0.0.0-cp312-cp312-linux_x86_64.whl"
           export MEGATRON_CORE_WHEEL_PATH=/workspace/megatron_core-0.0.0-cp312-cp312-linux_x86_64.whl
-          wget -q https://paddle-github-action.bj.bcebos.com/whl/ms_swift-0.0.0-py3-none-any.whl
-          export MS_SWIFT_WHEEL_PATH=/workspace/ms_swift-0.0.0-py3-none-any.whl
-          # export MS_SWIFT_WHEEL_PATH=/workspace/upload/ms_swift-0.0.0-py3-none-any.whl
+          export MS_SWIFT_WHEEL_PATH=/workspace/upload/ms_swift-0.0.0-py3-none-any.whl
           # The BOS wheels are republished under a fixed 0.0.0 filename 
           export UV_SKIP_WHEEL_FILENAME_CHECK=1
 
